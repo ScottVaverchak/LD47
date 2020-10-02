@@ -9,7 +9,7 @@ public class MouseLook : MonoBehaviour
     public float YClampMaxAngle;
     public float YClampMinAngle;
 
-    private Camera head;
+    public GameObject Camera;
 
     // Rotation
     private float rotX = 0.0f;
@@ -17,9 +17,9 @@ public class MouseLook : MonoBehaviour
 
     void Start()
     {
-        head = GetComponentInChildren<Camera>();
+        
 
-        if(head == null)
+        if(Camera == null)
         {
             Debug.LogError("Player is missing eyes to look out of -_-");
             return;
@@ -33,7 +33,7 @@ public class MouseLook : MonoBehaviour
 
         rotY = Mathf.Clamp(rotY, YClampMinAngle,YClampMaxAngle);
 
-        head.transform.localRotation = Quaternion.Euler(-rotY,0.0f, 0.0f);
+        Camera.transform.localRotation = Quaternion.Euler(-rotY,0.0f, 0.0f);
         transform.localRotation = Quaternion.Euler(0.0f,rotX, 0.0f);
 
     }

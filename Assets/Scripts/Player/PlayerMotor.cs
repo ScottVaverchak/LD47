@@ -5,18 +5,15 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMotor : MonoBehaviour
 {
-
     public float RunSpeed = 1.0f;
-
+    public float JumpForce = 1.0f;
     public GameObject Camera;
     public GameObject Feet;
-
     public LayerMask LevelLayerMask;
     
-    private bool isGrounded = true;
-
     public bool IsMoving { get; private set; }
-
+    
+    private bool isGrounded = true;
     private Rigidbody rb;
 
     void Start()
@@ -29,7 +26,7 @@ public class PlayerMotor : MonoBehaviour
         RaycastHit info;
         if(Physics.Raycast(Feet.transform.position, Vector3.down, out info, Mathf.Infinity, LevelLayerMask, QueryTriggerInteraction.Ignore)) {
             Debug.DrawLine(Feet.transform.position, info.point, Color.red);
-            isGrounded = info.distance < 0.1f;
+            isGrounded = info.distance < 0.2f;
         }
 
         var jump = Input.GetAxis("Jump");
@@ -37,13 +34,13 @@ public class PlayerMotor : MonoBehaviour
         var v = Input.GetAxis("Vertical");
 
         if(jump > 0 && isGrounded) { 
-            rb.AddForce(Vector3.up * 100.0f);
+            rb.velocity = new Vector3(0.0f, JumpForce, 0.0f);
             isGrounded = false;
         }
 
         Debug.DrawRay(Camera.transform.position, Camera.transform.forward * 2.0f, Color.red);
 
-        // @TODO(sjv): This should be a physics based movement system
+        // @TODO(sjv): This should be a physics based movement system - I think 
         var np = (new Vector3(v, 0, h)).normalized;
         IsMoving = v != 0 || h != 0;
 

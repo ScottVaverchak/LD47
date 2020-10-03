@@ -27,7 +27,7 @@ public class PlayerMotor : MonoBehaviour
     void Update()
     {
         RaycastHit info;
-        if(Physics.Raycast(Feet.transform.position, Vector3.down, out info, Mathf.Infinity, 1 << 8)) {
+        if(Physics.Raycast(Feet.transform.position, Vector3.down, out info, Mathf.Infinity, LevelLayerMask, QueryTriggerInteraction.Ignore)) {
             Debug.DrawLine(Feet.transform.position, info.point, Color.red);
             isGrounded = info.distance < 0.1f;
         }

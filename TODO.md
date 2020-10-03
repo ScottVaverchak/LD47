@@ -1,5 +1,7 @@
 # TODO List 
 
+ * Add spawn point
+ * Add items that give you time
  * Switch to a physics based movement system 
  * Jumping is still pretty sloppy 
  * Add levels 

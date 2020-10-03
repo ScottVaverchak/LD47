@@ -4,15 +4,34 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject Player;
+    public GameObject SpawnPoint;
+
     private float time;
 
-    // Start is called before the first frame update
+    // @HACK(sjv)
+    // @HACK(sjv)
+    private GUIStyle bigFont = new GUIStyle();
+
     void Start()
     {
-        time = 60.0f;
+        
+
+        if(Player == null) { 
+            Debug.LogError("Player is null omg");
+        }
+    
+        SpawnPlayer();
+
+
+
+
+
+        // @HACK(sjv)
+        bigFont.fontSize = 50;
+
     }
 
-    // Update is called once per frame
     void Update()
     {
         time -= Time.deltaTime;
@@ -20,7 +39,15 @@ public class GameManager : MonoBehaviour
 
     public void AddTime(float t) => time += t;
     
+    public void SpawnPlayer() { 
+        // @TODO(sjv): The spawn point will probably want a rotation / orientation
+        time = 60.0f;
+        Player.transform.position = SpawnPoint.transform.position + Vector3.up * 2.0f;
+    }
+    
+    
     void OnGUI() {
-        GUI.Label (new Rect (25, 25, 100, 30), string.Format("Time Left: {0:0.00}", time));
+        // @HACK(sjv)
+        GUILayout.Label (string.Format("Time Left: {0:0.00}", time), bigFont);
     }
 }

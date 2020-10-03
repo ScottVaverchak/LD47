@@ -9,7 +9,6 @@
 
  * Add levels 
  * Add beeps and boops sound effects 
- * Switch to a physics based movement system 
 
 ## Completed but needs love
 
@@ -17,3 +16,6 @@
  * Gun Sway should be smoother and more controllable
  * Jumping is still pretty sloppy 
  * Add spawn point
+ * Switch to a physics based movement system 
+
+ 

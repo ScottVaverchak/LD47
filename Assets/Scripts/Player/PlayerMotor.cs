@@ -10,6 +10,7 @@ public class PlayerMotor : MonoBehaviour
     public GameObject Camera;
     public GameObject Feet;
     public LayerMask LevelLayerMask;
+    public float MaxSpeed = 500.0f;
     
     public bool IsMoving { get; private set; }
     
@@ -21,7 +22,7 @@ public class PlayerMotor : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    void FixedUpdate() // i dunno lol
     {
         RaycastHit info;
         if(Physics.Raycast(Feet.transform.position, Vector3.down, out info, Mathf.Infinity, LevelLayerMask, QueryTriggerInteraction.Ignore)) {
@@ -40,19 +41,11 @@ public class PlayerMotor : MonoBehaviour
 
         Debug.DrawRay(Camera.transform.position, Camera.transform.forward * 2.0f, Color.red);
 
-        // @TODO(sjv): This should be a physics based movement system - I think 
-        var np = (new Vector3(v, 0, h)).normalized;
-        IsMoving = v != 0 || h != 0;
-
-        if(v != 0)
-            transform.position +=  Camera.transform.forward * Time.deltaTime * np.x * RunSpeed;
-
-        if(h != 0)
-            transform.position +=  Camera.transform.right * Time.deltaTime * np.z * RunSpeed;
-    }
-
-    void FixedUpdate() 
-    { 
+        var np = (transform.forward * v + transform.right * h);
         
+        IsMoving = v != 0 || h != 0;
+        
+        if(IsMoving)
+            rb.AddForce(np.normalized * RunSpeed);
     }
 }

@@ -13,8 +13,9 @@ public class PlayerMotor : MonoBehaviour
 
     public LayerMask LevelLayerMask;
     
-    [SerializeField]
     private bool isGrounded = true;
+
+    public bool IsMoving { get; private set; }
 
     private Rigidbody rb;
 
@@ -42,9 +43,11 @@ public class PlayerMotor : MonoBehaviour
 
         Debug.DrawRay(Camera.transform.position, Camera.transform.forward * 2.0f, Color.red);
 
+        // @TODO(sjv): This should be a physics based movement system
         var np = (new Vector3(v, 0, h)).normalized;
+        IsMoving = v != 0 || h != 0;
 
-        if(v != 0) 
+        if(v != 0)
             transform.position +=  Camera.transform.forward * Time.deltaTime * np.x * RunSpeed;
 
         if(h != 0)

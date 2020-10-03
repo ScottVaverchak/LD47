@@ -9,11 +9,13 @@ public class AntigravityGun : MonoBehaviour
     public float ReloadTimer = 1.0f;
 
     private float currentReload;
+    private ParticleSystem ps;
 
     // Start is called before the first frame update
     void Start()
     {
         currentReload = 100.0f;
+        ps = GetComponentInChildren<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -27,12 +29,11 @@ public class AntigravityGun : MonoBehaviour
         if(Input.GetAxis("Fire1") > 0 && currentReload > ReloadTimer) {
             var pt = transform.parent.transform;
             currentReload = 0.0f;
-            // @TODO(sjv): Add particle on fire
+            ps.Play();
             RaycastHit info;
             // @MAGIC(sjv): 1 << 8 should be a proper LayerMask
             if(Physics.Raycast(pt.position, pt.forward, out info, Mathf.Infinity, 1 << 8, QueryTriggerInteraction.Ignore)) {
                 // Modify force based on that (use a curve my man)
-                // @TODO(sjv): Add particle on hit
                 PlayerRigidBody.AddExplosionForce(2000.0f, info.point, 50.0f);
                 Instantiate(ExplosionPrefab, info.point, Quaternion.identity);
             }

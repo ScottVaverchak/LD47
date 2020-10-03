@@ -310,6 +310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerRigidBody: {fileID: 2358522997872787560}
+  ExplosionPrefab: {fileID: 7744629531982384350, guid: b96f9680ee5076540b8d04381bf9e067, type: 3}
   ReloadTimer: 1
 --- !u!1 &2358522998824992408
 GameObject:

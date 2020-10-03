@@ -2,12 +2,10 @@
 
 ## Current
 
- * Add anti-gravity gun (think rocket launcher but without the big boom)
-    * Distance from a surface will determine how far you go 
+ * Add levels  
 
 ## Main ones
 
- * Add levels 
  * Add beeps and boops sound effects 
 
 ## Completed but needs love
@@ -17,5 +15,5 @@
  * Jumping is still pretty sloppy 
  * Add spawn point
  * Switch to a physics based movement system 
-
+ * Add anti-gravity gun (think rocket launcher but without the big boom)
  
